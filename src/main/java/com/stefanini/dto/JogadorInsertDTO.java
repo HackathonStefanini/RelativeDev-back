@@ -9,12 +9,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JogadorDTO {
-
-
-    private Long id;
+public class JogadorInsertDTO {
 
     @Column(unique = true)
+    @NotBlank(message = "Nickname é obrigatório")
     private String nickname;
 
     @Column
@@ -23,8 +21,8 @@ public class JogadorDTO {
     private String password;
 
     @Column
+    @NotBlank(message = "Saldo é obrigatório")
     private BigDecimal saldo;
-
 
     @ManyToMany
     @JoinTable(name = "Jogador_Stefamon",
@@ -32,4 +30,38 @@ public class JogadorDTO {
             inverseJoinColumns = {@JoinColumn(name = "IdStefamon")})
     private List<Stefamon> stefamons = new ArrayList<>();
 
+    public JogadorInsertDTO() {
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+
+    public List<Stefamon> getStefamons() {
+        return stefamons;
+    }
+
+    public void setStefamons(List<Stefamon> stefamons) {
+        this.stefamons = stefamons;
+    }
 }
