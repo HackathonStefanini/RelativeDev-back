@@ -28,7 +28,6 @@ public class Jogador implements Serializable {
     private String password;
 
     @Column
-    @NotNull
     private BigDecimal saldo;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -41,10 +40,14 @@ public class Jogador implements Serializable {
     }
 
     public Jogador(JogadorInsertDTO jogador) {
+        if(jogador.getSaldo().isBlank() || jogador.getSaldo() == null){
+            this.saldo = new BigDecimal("100.00");
+        }else {
+            this.saldo = new BigDecimal(jogador.getSaldo());
+        }
         this.id = null;
         this.nickname = jogador.getNickname();
         this.password = CryptPassword.criptografarSenha(jogador.getPassword());
-        this.saldo = new BigDecimal(jogador.getSaldo());
     }
 
     public Long getId() {

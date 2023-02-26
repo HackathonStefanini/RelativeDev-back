@@ -2,20 +2,20 @@ package com.stefanini.utils;
 
 public class Login {
 
-    private String login;
+    private String nickname;
     private String password;
 
-    public Login(String login, String password) {
-        this.login = login;
+    public Login(String nickname, String password) {
+        this.nickname = nickname;
         this.password = password;
     }
 
     public String getLogin() {
-        return login;
+        return nickname;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setLogin(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {

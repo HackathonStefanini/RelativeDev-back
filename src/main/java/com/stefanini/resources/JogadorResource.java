@@ -3,6 +3,7 @@ package com.stefanini.resources;
 import com.stefanini.dto.JogadorInsertDTO;
 import com.stefanini.entity.Jogador;
 import com.stefanini.service.JogadorService;
+import com.stefanini.utils.Login;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -20,7 +21,7 @@ public class JogadorResource {
     public Response pegarPorId(@PathParam("id") Long id){
         return Response.status(Response.Status.OK).entity(jogadorService.pegarPorId(id)).build();
     }
-    
+
     @GET
     @Path("/todos")
     public Response listarTodos(){
@@ -44,6 +45,12 @@ public class JogadorResource {
     public Response deletar(@PathParam("id") Long id) {
         jogadorService.deletar(id);
         return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
+    @POST
+    @Path("/login")
+    public Response login(Login login){
+        return Response.status(Response.Status.OK).entity(jogadorService.loginValid(login)).build();
     }
 
 }
