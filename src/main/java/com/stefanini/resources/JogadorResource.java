@@ -20,7 +20,7 @@ public class JogadorResource {
     public Response pegarPorId(@PathParam("id") Long id){
         return Response.status(Response.Status.OK).entity(jogadorService.pegarPorId(id)).build();
     }
-
+    
     @GET
     @Path("/todos")
     public Response listarTodos(){

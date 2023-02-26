@@ -18,8 +18,8 @@ public class JogadorService {
     JogadorRepository jogadorRepository;
 
     public void salvar(JogadorInsertDTO jogador) {
-        Jogador player = new Jogador(jogador);
-        jogadorRepository.save(player);
+        if (jogador.getSaldo() == null) jogador.setSaldo("123.00");
+        jogadorRepository.save(new Jogador(jogador));
     }
 
     public Jogador pegarPorId(Long id) {

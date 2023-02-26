@@ -1,17 +1,16 @@
 package com.stefanini.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_stefamon")
 public class Stefamon implements Serializable {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "Id_stefamon")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)

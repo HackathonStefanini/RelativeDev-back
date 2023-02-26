@@ -11,7 +11,6 @@ import java.util.List;
 
 public class JogadorInsertDTO {
 
-    @Column(unique = true)
     @NotBlank(message = "Nickname é obrigatório")
     private String nickname;
 
@@ -21,8 +20,7 @@ public class JogadorInsertDTO {
     private String password;
 
     @Column
-    @NotBlank(message = "Saldo é obrigatório")
-    private BigDecimal saldo;
+    private String saldo;
 
     @ManyToMany
     @JoinTable(name = "Jogador_Stefamon",
@@ -31,6 +29,13 @@ public class JogadorInsertDTO {
     private List<Stefamon> stefamons = new ArrayList<>();
 
     public JogadorInsertDTO() {
+    }
+
+    public JogadorInsertDTO(String nickname, String password, String saldo, List<Stefamon> stefamons) {
+        this.nickname = nickname;
+        this.password = password;
+        this.saldo = saldo;
+        this.stefamons = stefamons;
     }
 
     public String getNickname() {
@@ -49,11 +54,11 @@ public class JogadorInsertDTO {
         this.password = password;
     }
 
-    public BigDecimal getSaldo() {
+    public String getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(BigDecimal saldo) {
+    public void setSaldo(String saldo) {
         this.saldo = saldo;
     }
 

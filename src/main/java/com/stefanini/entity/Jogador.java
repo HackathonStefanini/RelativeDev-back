@@ -5,6 +5,7 @@ import com.stefanini.utils.CryptPassword;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ import java.util.List;
 public class Jogador implements Serializable {
 
     @Id
-    @Column(name = "id_jogador")
+    @Column(name = "Id_jogador")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,18 +25,16 @@ public class Jogador implements Serializable {
     private String nickname;
 
     @Column
-    @NotBlank(message = "A senha é obrigatória")
-    @Size(min = 4, max = 10, message = "A senha deve ter entre 4 e 10 caracteres")
     private String password;
 
     @Column
+    @NotNull
     private BigDecimal saldo;
 
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Jogador_Stefamon",
-            joinColumns = {@JoinColumn(name = "IdJogador")},
-            inverseJoinColumns = {@JoinColumn(name = "IdStefamon")})
+            joinColumns = {@JoinColumn(name = "Id_jogador")},
+            inverseJoinColumns = {@JoinColumn(name = "Id_stefamon")})
     private List<Stefamon> stefamons = new ArrayList<>();
 
     public Jogador() {
@@ -45,8 +44,7 @@ public class Jogador implements Serializable {
         this.id = null;
         this.nickname = jogador.getNickname();
         this.password = CryptPassword.criptografarSenha(jogador.getPassword());
-        this.saldo = jogador.getSaldo();
-        this.stefamons = jogador.getStefamons();
+        this.saldo = new BigDecimal(jogador.getSaldo());
     }
 
     public Long getId() {
