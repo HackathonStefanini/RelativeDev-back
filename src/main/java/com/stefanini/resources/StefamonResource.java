@@ -1,5 +1,7 @@
 package com.stefanini.resources;
 
+import com.stefanini.dto.JogadorInsertDTO;
+import com.stefanini.service.JogadorService;
 import com.stefanini.service.StefamonService;
 
 import javax.inject.Inject;
@@ -25,6 +27,12 @@ public class StefamonResource {
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
         return Response.status(Response.Status.OK).entity(service.pegarPorId(id)).build();
+    }
+
+    @GET
+    @Path("/comprar/{id}/{usuario}")
+    public Response comprar(@PathParam("id") Long id, @PathParam("usuario") Long idJogador) {
+        return Response.status(Response.Status.OK).entity(service.comprar(id, idJogador)).build();
     }
 
 }

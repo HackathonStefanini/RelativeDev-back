@@ -59,4 +59,5 @@ public class JogadorService {
     private List<Jogador> findByNickName(String login) {
         return jogadorRepository.findByNickName(login);
     }
+
 }
