@@ -1,5 +1,6 @@
 package com.stefanini.resources;
 
+import com.stefanini.dto.JogadorInsertDTO;
 import com.stefanini.entity.Jogador;
 import com.stefanini.service.JogadorService;
 
@@ -8,7 +9,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@ApplicationPath("/jogador")
+@Path("/jogador")
 public class JogadorResource {
 
     @Inject
@@ -27,7 +28,7 @@ public class JogadorResource {
     }
 
     @POST
-    public Response salvar(@Valid Jogador jogador) {
+    public Response salvar(@Valid JogadorInsertDTO jogador) {
         jogadorService.salvar(jogador);
         return Response.status(Response.Status.CREATED).build();
     }
