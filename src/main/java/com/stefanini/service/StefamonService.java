@@ -36,7 +36,7 @@ public class StefamonService {
         return stefamon;
     }
 
-    public BigDecimal comprar(Long id, Long idJogador) {
+    public String comprar(Long id, Long idJogador) {
         Stefamon stefamon = pegarPorId(id);
         Jogador jogador = jogadorRepository.findById(idJogador);
         double num = jogador.getSaldo().doubleValue();
@@ -48,8 +48,10 @@ public class StefamonService {
             jogador.setSaldo(new BigDecimal((num - valor)));
             jogador.getStefamons().add(stefamon);
             jogadorRepository.update(jogador);
+            return "Compra realizada com sucesso!";
+        } else {
+            throw new GenericExceptions(Response.Status.CONFLICT, "Você Atingiu o limite máximo de 6 stefamons");
         }
-        throw new GenericExceptions(Response.Status.CONFLICT, "Você Atingiu o limite máximo de 6 stefamons");
     }
 
  }
